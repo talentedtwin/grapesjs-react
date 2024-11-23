@@ -4,8 +4,8 @@ import Editor from "@/app/components/Editor/Editor";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <div>
+      <main>
         <Editor />
       </main>
     </div>
