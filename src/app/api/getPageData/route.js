@@ -6,8 +6,12 @@ async function getPageData(request) {
   const id = searchParams.get("id");
   console.log(id);
 
-  const { data, error } = await supabase.from("pages").select("*").eq("id", id);
+  const { data, error } = await supabase
+    .from("pagedata")
+    .select("*")
+    .eq("id", id);
   if (error) throw error;
+  //console.log("data", data);
   return data;
 }
 
@@ -15,12 +19,17 @@ async function updatePageData(id, data) {
   const timestamp = new Date().toISOString();
 
   const item = {
-    ...data,
-    date_edited: timestamp,
+    html: data.html,
+    css: data.css,
+    components: data.components,
+    styles: data.styles,
+    assets: data.assets,
+    pages: data.pages,
+    updated_at: timestamp,
   };
 
   const { data: result, error } = await supabase
-    .from("pages")
+    .from("pagedata")
     .update(item)
     .eq("id", id)
     .select()
@@ -40,7 +49,14 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const { id, data } = await request.json();
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    const { data } = await request.json();
+    console.log("data", data);
+    console.log("id", id);
+    if (!id) {
+      return NextResponse.json({ error: "ID is required" }, { status: 400 });
+    }
     const result = await updatePageData(id, data);
     return NextResponse.json(result);
   } catch (error) {

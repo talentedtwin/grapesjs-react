@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build:css && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:css": "postcss src/styles/all-styles.css -o public/build/styles.css",
+    "build:editor-css": "postcss src/styles/editor-tailwind.css -o public/build/editor-tailwind.css"
   },
   "dependencies": {
     "@grapesjs/react": "^1.0.0",
@@ -16,15 +18,24 @@
     "grapesjs": "^0.20.4",
     "grapesjs-blocks-basic": "^1.0.2",
     "grapesjs-blocks-flexbox": "^1.0.1",
+    "grapesjs-parser-postcss": "^1.0.3",
     "grapesjs-plugin-forms": "^2.0.6",
     "grapesjs-preset-webpage": "^1.0.3",
+    "grapesjs-tailwind": "^1.0.11",
     "next": "14.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.3.0"
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "css-loader": "^7.1.2",
+    "cssnano": "^7.0.6",
     "eslint": "^8",
-    "eslint-config-next": "14.2.3"
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.4.15"
   }
 }
