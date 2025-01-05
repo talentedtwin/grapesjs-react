@@ -16,6 +16,8 @@ export default function CustomEditor() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
+  console.log("id", id);
+
   const onEditor = (editor) => {
     console.log("Editor loaded", { editor });
 

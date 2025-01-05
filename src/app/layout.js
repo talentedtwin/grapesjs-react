@@ -1,5 +1,5 @@
+import KindeProviderWrapper from "./components/KindeProviderWrapper";
 import localFont from "next/font/local";
-import { Suspense } from "react";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -21,9 +21,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Suspense fallback={<div>Loading...</div>}>
-        <body>{children}</body>
-      </Suspense>
+      <KindeProviderWrapper>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          {children}
+        </body>
+      </KindeProviderWrapper>
     </html>
   );
 }

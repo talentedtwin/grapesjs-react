@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  },
   reactStrictMode: true,
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -12,10 +15,10 @@ const nextConfig = {
         encoding: false,
       };
     }
-    config.module.rules.push({
-      test: /\.css$/,
-      use: ["style-loader", "css-loader"],
-    });
+    // config.module.rules.push({
+    //   test: /\.css$/,
+    //   use: ["style-loader", "css-loader"],
+    // });
     return config;
   },
 };
